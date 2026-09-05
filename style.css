@@ -1,0 +1,436 @@
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(
+            circle at center,
+            #242a27 0%,
+            #1b201e 50%,
+            #151917 100%
+        );
+    color: #111;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   Main Page
+========================= */
+
+.page {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100dvh;
+    margin: 0 auto;
+
+    padding:
+        max(24px, env(safe-area-inset-top))
+        24px
+        max(30px, env(safe-area-inset-bottom));
+
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.page.page-loaded {
+    animation: pageFadeIn 0.8s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   Top Actions
+========================= */
+
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 62px;
+}
+
+.top-btn {
+    width: 29px;
+    height: 29px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #e6e7e6;
+    color: #414542;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.top-btn:active {
+    transform: scale(0.9);
+    background: #ccc;
+}
+
+
+/* =========================
+   Student Card
+========================= */
+
+.student-card {
+    width: 100%;
+    background: #fff;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.65),
+        0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Banner
+========================= */
+
+.banner {
+    width: 100%;
+    height: 112px;
+
+    background: #ddd;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   Profile
+========================= */
+
+.profile-section {
+    display: flex;
+    align-items: flex-start;
+
+    padding: 10px 25px 5px 24px;
+
+    min-height: 140px;
+}
+
+.profile-image-wrap {
+    flex: 0 0 98px;
+    width: 98px;
+    height: 98px;
+
+    margin-right: 18px;
+
+    border-radius: 50%;
+
+    background: #eee;
+
+    padding: 3px;
+
+    border: 1px solid #aaa;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    display: block;
+}
+
+.student-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.student-info h1 {
+    font-size: 24px;
+    line-height: 1.05;
+    font-weight: 500;
+
+    margin-bottom: 7px;
+
+    white-space: nowrap;
+}
+
+.info-row {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.info-row strong {
+    font-weight: 400;
+}
+
+
+/* =========================
+   Notice
+========================= */
+
+.notice-section {
+    margin: 12px 23px 0;
+
+    height: 216px;
+
+    background: #e9e9e9;
+
+    border-radius: 8px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #9a9a9a;
+}
+
+.notice-title {
+    position: absolute;
+    top: 7px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-weight: 600;
+    font-size: 13px;
+
+    color: #111;
+}
+
+.notice-content {
+    font-size: 9px;
+}
+
+
+/* =========================
+   Contact Actions
+========================= */
+
+.contact-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 19px 15px 12px;
+}
+
+.action-btn {
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    background: #e8e8e8;
+    color: #575b59;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    border: 1px solid #d3d3d3;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.action-btn:active {
+    transform: scale(0.88);
+    background: #d3d3d3;
+    color: #111;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+    padding: 0 10px 10px;
+
+    text-align: center;
+
+    color: #737373;
+    font-size: 8px;
+}
+
+footer span {
+    color: #48bd70;
+}
+
+
+/* =========================
+   Snackbar
+========================= */
+
+#snackbar {
+    position: fixed;
+
+    left: 50%;
+    bottom: calc(25px + env(safe-area-inset-bottom));
+
+    transform: translate(-50%, 25px);
+
+    width: calc(100% - 40px);
+    max-width: 360px;
+
+    background: #323633;
+    color: #fff;
+
+    padding: 12px 15px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 12px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 999;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s;
+}
+
+#snackbar i {
+    color: #61d788;
+    font-size: 15px;
+}
+
+#snackbar.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translate(-50%, 0);
+}
+
+
+/* =========================
+   Smaller Phones
+========================= */
+
+@media (max-width: 360px) {
+
+    .page {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .top-actions {
+        margin-bottom: 55px;
+    }
+
+    .profile-section {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .profile-image-wrap {
+        width: 88px;
+        height: 88px;
+
+        flex-basis: 88px;
+
+        margin-right: 13px;
+    }
+
+    .student-info h1 {
+        font-size: 21px;
+    }
+
+    .info-row {
+        grid-template-columns: 60px 1fr;
+        font-size: 12px;
+    }
+
+    .notice-section {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+}
+
+
+/* Disable hover-style effects on touch devices */
+@media (hover: hover) {
+
+    .top-btn:hover {
+        background: #d2d4d2;
+    }
+
+    .action-btn:hover {
+        background: #d6d6d6;
+        color: #111;
+    }
+}
