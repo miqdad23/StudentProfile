@@ -1,0 +1,827 @@
+/* =====================================
+   RESET
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    background: #171b19;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #272d2a 0%,
+            #1e2421 46%,
+            #151917 100%
+        );
+
+    color: #111;
+
+    overflow-x: hidden;
+
+    -webkit-tap-highlight-color: transparent;
+
+    -webkit-text-size-adjust: 100%;
+}
+
+
+/* =====================================
+   VERIFICATION OVERLAY
+===================================== */
+
+#verificationScreen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242b27,
+            #171b19 70%
+        );
+
+    transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+}
+
+
+/* Hide verification overlay */
+#verificationScreen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* Verification States */
+.verify-state {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(0.93);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.verify-state.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* =====================================
+   LOADING SPINNER
+===================================== */
+
+.loader {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    border: 4px solid rgba(255, 255, 255, 0.13);
+
+    border-top-color: #4bd678;
+
+    animation: loaderSpin 0.75s linear infinite;
+
+    box-shadow:
+        0 0 20px rgba(75, 214, 120, 0.08);
+}
+
+#loadingState p {
+    margin-top: 17px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 13px;
+
+    letter-spacing: 0.4px;
+}
+
+@keyframes loaderSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =====================================
+   VERIFIED CHECK
+===================================== */
+
+.check-circle {
+    width: 72px;
+    height: 72px;
+}
+
+.check-circle svg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+.check-circle-path {
+    stroke: #42d474;
+
+    stroke-width: 3;
+
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+
+    stroke-linecap: round;
+}
+
+.check-mark {
+    stroke: #42d474;
+
+    stroke-width: 4;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 42;
+    stroke-dashoffset: 42;
+}
+
+
+/* Run animation after verified state appears */
+#verifiedState.active .check-circle-path {
+    animation: drawCircle 0.5s ease forwards;
+}
+
+#verifiedState.active .check-mark {
+    animation:
+        drawCheck 0.35s 0.38s ease forwards;
+}
+
+@keyframes drawCircle {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+@keyframes drawCheck {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+/* Verified Text */
+.verified-text {
+    margin-top: 13px;
+
+    color: #56df83;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    letter-spacing: 0.4px;
+
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+#verifiedState.active .verified-text {
+    animation:
+        verifiedText 0.4s 0.55s ease forwards;
+}
+
+@keyframes verifiedText {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================
+   MAIN MOBILE CONTAINER
+===================================== */
+
+.page {
+    width: 100%;
+
+    /*
+       The page never becomes wider than
+       a normal large mobile.
+    */
+    max-width: 430px;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0 auto;
+
+    padding-top:
+        max(24px, env(safe-area-inset-top));
+
+    padding-right:
+        max(18px, env(safe-area-inset-right));
+
+    padding-bottom:
+        max(28px, env(safe-area-inset-bottom));
+
+    padding-left:
+        max(18px, env(safe-area-inset-left));
+
+    opacity: 0;
+
+    transform: translateY(13px) scale(0.992);
+}
+
+
+/* Page appears after verification */
+.page.show-page {
+    animation: showMainPage 0.75s ease forwards;
+}
+
+@keyframes showMainPage {
+
+    from {
+        opacity: 0;
+        transform: translateY(13px) scale(0.992);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =====================================
+   TOP BUTTONS
+===================================== */
+
+.top-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: clamp(7px, 2.2vw, 10px);
+
+    /*
+       Responsive vertical distance
+    */
+    margin-bottom:
+        clamp(42px, 15vw, 64px);
+}
+
+.top-btn {
+    width: clamp(28px, 8vw, 31px);
+    height: clamp(28px, 8vw, 31px);
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #e7e8e7;
+    color: #424642;
+
+    font-size: clamp(11px, 3vw, 13px);
+
+    cursor: pointer;
+
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.28);
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.top-btn:active {
+    transform: scale(0.88);
+    background: #cfd1cf;
+}
+
+
+/* =====================================
+   CARD
+===================================== */
+
+.student-card {
+    width: 100%;
+
+    background: #fff;
+
+    border-radius: clamp(7px, 2.4vw, 10px);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.58),
+        0 10px 27px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =====================================
+   BANNER
+===================================== */
+
+.banner {
+    position: relative;
+
+    width: 100%;
+
+    /*
+       Keeps the banner proportional
+       on different mobile widths.
+    */
+    aspect-ratio: 2.75 / 1;
+
+    min-height: 92px;
+    max-height: 125px;
+
+    background: #ddd;
+
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* =====================================
+   PROFILE AREA
+===================================== */
+
+.profile-section {
+    width: 100%;
+
+    display: grid;
+
+    /*
+       Image column automatically scales
+       based on mobile width.
+    */
+    grid-template-columns:
+        clamp(78px, 27vw, 100px)
+        minmax(0, 1fr);
+
+    gap: clamp(11px, 4vw, 18px);
+
+    align-items: start;
+
+    padding:
+        clamp(9px, 2.5vw, 12px)
+        clamp(15px, 6vw, 25px)
+        clamp(6px, 2vw, 10px);
+}
+
+
+/* Profile Image */
+.profile-image-wrap {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    background: #eee;
+
+    padding: 3px;
+
+    border: 1px solid #aaa;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.17);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================
+   STUDENT INFO
+===================================== */
+
+.student-info {
+    width: 100%;
+    min-width: 0;
+}
+
+.student-info h1 {
+    max-width: 100%;
+
+    margin-bottom: clamp(5px, 1.5vw, 8px);
+
+    color: #090909;
+
+    font-size: clamp(19px, 6vw, 25px);
+
+    line-height: 1.05;
+
+    font-weight: 500;
+
+    /*
+       Prevent long name from
+       breaking the card.
+    */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        clamp(52px, 18vw, 72px)
+        minmax(0, 1fr);
+
+    font-size: clamp(10.5px, 3.15vw, 13px);
+
+    line-height: 1.28;
+}
+
+.info-row span,
+.info-row strong {
+    min-width: 0;
+}
+
+.info-row strong {
+    font-weight: 400;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   NOTICE
+===================================== */
+
+.notice-section {
+    position: relative;
+
+    width: calc(100% - clamp(30px, 12vw, 48px));
+
+    /*
+       Height also follows phone width.
+    */
+    height: clamp(180px, 58vw, 220px);
+
+    margin:
+        clamp(7px, 2.5vw, 13px)
+        auto 0;
+
+    border-radius: clamp(6px, 2vw, 9px);
+
+    background: #e9e9e9;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.notice-title {
+    position: absolute;
+
+    top: clamp(6px, 2vw, 9px);
+    left: 0;
+
+    width: 100%;
+
+    padding: 0 10px;
+
+    text-align: center;
+
+    color: #111;
+
+    font-size: clamp(11px, 3.2vw, 13px);
+
+    font-weight: 600;
+}
+
+.notice-content {
+    max-width: 90%;
+
+    padding: 35px 10px 15px;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: clamp(8px, 2.3vw, 10px);
+}
+
+
+/* =====================================
+   CONTACT BUTTONS
+===================================== */
+
+.contact-actions {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(17px, 6vw, 24px);
+
+    padding:
+        clamp(15px, 5vw, 20px)
+        12px
+        clamp(9px, 3vw, 13px);
+}
+
+.action-btn {
+    width: clamp(28px, 8vw, 31px);
+    height: clamp(28px, 8vw, 31px);
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d3d3d3;
+
+    border-radius: 50%;
+
+    background: #e8e8e8;
+
+    color: #575b59;
+
+    font-size: clamp(11px, 3vw, 13px);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.action-btn:active {
+    transform: scale(0.87);
+
+    background: #d2d2d2;
+
+    color: #111;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    width: 100%;
+
+    padding:
+        0 10px
+        clamp(8px, 2.5vw, 11px);
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: clamp(7px, 2vw, 8.5px);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+footer span {
+    color: #45bd70;
+}
+
+
+/* =====================================
+   SNACKBAR
+===================================== */
+
+#snackbar {
+    position: fixed;
+
+    left: 50%;
+
+    bottom:
+        max(
+            22px,
+            calc(
+                env(safe-area-inset-bottom) + 14px
+            )
+        );
+
+    transform:
+        translate(-50%, 25px);
+
+    width: calc(100% - 36px);
+
+    max-width: 360px;
+
+    min-height: 44px;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    background: #323633;
+
+    color: #fff;
+
+    font-size: clamp(11px, 3vw, 13px);
+
+    line-height: 1.35;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.38);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+#snackbar i {
+    flex: 0 0 auto;
+
+    color: #60d889;
+
+    font-size: 15px;
+}
+
+#snackbar.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =====================================
+   VERY SMALL PHONES
+   320px - 340px
+===================================== */
+
+@media (max-width: 340px) {
+
+    .page {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .profile-section {
+        grid-template-columns: 75px minmax(0, 1fr);
+
+        gap: 10px;
+
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .student-info h1 {
+        font-size: 18px;
+    }
+
+    .info-row {
+        grid-template-columns: 50px minmax(0, 1fr);
+
+        font-size: 10px;
+    }
+
+    .contact-actions {
+        gap: 16px;
+    }
+
+}
+
+
+/* =====================================
+   TALL MOBILE SCREENS
+===================================== */
+
+@media (
+    min-height: 750px
+)
+and (
+    max-width: 480px
+) {
+
+    .top-actions {
+        margin-bottom:
+            clamp(52px, 16vw, 68px);
+    }
+
+}
+
+
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}

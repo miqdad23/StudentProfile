@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#181c1a">
+
+    <title>Govt. Debendra College</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome Free -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <!-- ==============================
+         Verification Screen
+    =============================== -->
+    <div id="verificationScreen">
+
+        <!-- Loading -->
+        <div id="loadingState" class="verify-state active">
+            <div class="loader"></div>
+            <p>Verifying...</p>
+        </div>
+
+        <!-- Verified -->
+        <div id="verifiedState" class="verify-state">
+
+            <div class="check-circle">
+                <svg viewBox="0 0 52 52">
+                    <circle
+                        class="check-circle-path"
+                        cx="26"
+                        cy="26"
+                        r="24"
+                        fill="none"
+                    />
+
+                    <path
+                        class="check-mark"
+                        fill="none"
+                        d="M14 27l8 8 17-18"
+                    />
+                </svg>
+            </div>
+
+            <div class="verified-text">
+                Verified
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         Main Mobile Page
+    =============================== -->
+    <main class="page" id="mainPage">
+
+        <!-- Top Buttons -->
+        <div class="top-actions">
+
+            <button
+                class="top-btn"
+                id="supportBtn"
+                type="button"
+                aria-label="Support"
+            >
+                <i class="fa-solid fa-headset"></i>
+            </button>
+
+            <button
+                class="top-btn"
+                id="loginBtn"
+                type="button"
+                aria-label="Login"
+            >
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+
+        </div>
+
+
+        <!-- Main Card -->
+        <section class="student-card">
+
+            <!-- Banner -->
+            <div class="banner">
+                <img
+                    src="assets/banner.png"
+                    alt="Govt. Debendra College Banner"
+                >
+            </div>
+
+
+            <!-- Profile -->
+            <div class="profile-section">
+
+                <div class="profile-image-wrap">
+
+                    <img
+                        src="assets/profile.jpeg"
+                        alt="Student Profile"
+                        class="profile-image"
+                    >
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h1>Miqdad Khan</h1>
+
+                    <div class="info-row">
+                        <span>Class:</span>
+                        <strong>XI-XII</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Roll:</span>
+                        <strong>242562253</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Group:</span>
+                        <strong>Humanities</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Validity:</span>
+                        <strong>2027</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Notice -->
+            <div class="notice-section">
+
+                <div class="notice-title">
+                    Student Notice
+                </div>
+
+                <div class="notice-content">
+                    Nothing here yet.
+                </div>
+
+            </div>
+
+
+            <!-- Contact Buttons -->
+            <nav class="contact-actions">
+
+                <!-- Website -->
+                <a
+                    href="https://www.debendracollege.gov.bd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-btn"
+                    aria-label="College Website"
+                >
+                    <i class="fa-solid fa-globe"></i>
+                </a>
+
+
+                <!-- Location -->
+                <a
+                    href="https://maps.app.goo.gl/5n7eNCEeQU5yj8z5A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-btn"
+                    aria-label="College Location"
+                >
+                    <i class="fa-solid fa-location-dot"></i>
+                </a>
+
+
+                <!-- Email -->
+                <a
+                    href="mailto:debendracollege@gmail.com"
+                    class="action-btn"
+                    aria-label="Email College"
+                >
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+
+
+                <!-- Phone -->
+                <a
+                    href="tel:02996610404"
+                    class="action-btn"
+                    aria-label="Call College"
+                >
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+
+            </nav>
+
+
+            <!-- Footer -->
+            <footer>
+                Business CardBD • Powered by
+                <span>Pixasoft</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         Snackbar
+    =============================== -->
+    <div
+        id="snackbar"
+        role="status"
+        aria-live="polite"
+    >
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span id="snackbarText">
+            This feature is currently under development.
+        </span>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
